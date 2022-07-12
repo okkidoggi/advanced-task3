@@ -12,18 +12,20 @@ spec:
         app: consumer
     spec:
       containers:
-      - name: consumer
-        image: wyteng/task2consumer
-        env:
-        - name: RABBITMQ_HOST
-          value: "rabbitmq"
-        - name: RABBITMQ_PORT
-          value: "5672"
+        - name: consumer
+          image: wyteng/task2consumer
+          env:
+            - name: RABBITMQ_HOST
+              value: "rabbitmq"
+            - name: RABBITMQ_PORT
+              value: "5672"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: consumer
+  annotations:
+    konghq.com/plugins: 12-per-min
 spec:
   type: NodePort
   selector:
